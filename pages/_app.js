@@ -1,9 +1,13 @@
 import AuthContextProvider from '../context/auth/authState';
+import AppContextProvider from '../context/app/appState';
+import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   return (
     <AuthContextProvider>
-      <Component {...pageProps} />
+      <AppContextProvider>
+        <Component {...pageProps} />
+      </AppContextProvider>
     </AuthContextProvider>
     
   )

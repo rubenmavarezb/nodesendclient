@@ -1,5 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Alert from '../components/Alert';
+import Spinner from '../components/Spinner';
 import AuthContext from '../context/auth/authContext';
 import Layout from '../components/Layout';
 import { useFormik } from 'formik';
@@ -8,7 +10,9 @@ import * as Yup from 'yup';
 const NewAccount = () => {
 
     const authContext = useContext(AuthContext);
-    const { msg, registerUser } = authContext;
+    const { msg, auth_loading, registerUser } = authContext;
+
+    const router = useRouter();
 
     const formik = useFormik({
         initialValues: {
@@ -25,6 +29,14 @@ const NewAccount = () => {
             registerUser(values);
         }
     })
+    useEffect(() => {
+        if(msg === 'User created') {
+            setTimeout(() => {
+                router.push('/login')
+            }, 3000)
+            
+        }
+    }, [msg])
 
   return ( 
     <Layout>
@@ -33,10 +45,15 @@ const NewAccount = () => {
             {msg && <Alert/>}
           <div className="flex justify-center mt-5">
               <div className="w-full max-w-lg">
-                  <form 
+                {auth_loading ? (
+                    <div className="bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4 flex justify-center">
+                        <Spinner/>
+                    </div>
+                ) : (
+                <form 
                     className="bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4"
                     onSubmit={formik.handleSubmit}
-                  >
+                >
                     <div className="mb-4">
                         <label 
                             htmlFor="name" 
@@ -108,7 +125,9 @@ const NewAccount = () => {
                         className="bg-red-500 transition-all duration-300 ease-in-out hover:bg-gray-900 w-full p-2 text-white uppercase font-bold"
                         value="Create account"
                     />
-                  </form>
+                </form>
+                )}
+
               </div>
           </div>
       </div>

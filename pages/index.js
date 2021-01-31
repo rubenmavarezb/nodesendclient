@@ -1,14 +1,18 @@
 import React, { useContext, useEffect } from 'react';
 import Layout from '../components/Layout';
+import Alert from '../components/Alert';
 import Dropzone from '../components/Dropzone';
 import AuthContext from '../context/auth/authContext';
-import Link from 'next/link'
+import AppContext from '../context/app/appContext';
+import Link from 'next/link';
 
 const Index = () => {
 
   const authContext = useContext(AuthContext);
-
   const { userAuthenticated } = authContext;
+
+  const appContext = useContext(AppContext);
+  const { file_msg } = appContext;
 
   useEffect(() => {
     userAuthenticated();
@@ -17,6 +21,7 @@ const Index = () => {
   return ( 
     <Layout>
       <div className="md:w-4/5 xl:w-3/5 mx-auto mb-32">
+        {file_msg && <Alert/>}
         <div className="lg:flex md:shadow-lg p-5 bg-white rounded-lg py-10">
           <Dropzone/>
           <div className="md:flex-1 mb-3 mx-2 mt-16 lg:mt-0">

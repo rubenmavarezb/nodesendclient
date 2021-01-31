@@ -1,4 +1,6 @@
 import {
+    REGISTRATION,
+    LOGIN,
     SUCCESSFUL_REGISTRATION,
     ERROR_REGISTRATION,
     CLEAR_ALERTS, 
@@ -14,14 +16,22 @@ const AuthReducer = (state, action) => {
         case ERROR_LOGIN:
             return {
                 ...state,
-                msg: action.payload
+                msg: action.payload,
+                auth_loading: null
+            }
+        case REGISTRATION:
+        case LOGIN: 
+            return {
+                ...state,
+                auth_loading: true
             }
         case SUCCESSFUL_LOGIN:
             localStorage.setItem('reactnodesendtoken', action.payload);
             return {
                 ...state,
                 token: action.payload,
-                authenticated: true
+                authenticated: true,
+                auth_loading: null
             }
         case USER_AUTHENTICATED:
             return {
@@ -45,4 +55,5 @@ const AuthReducer = (state, action) => {
             return state
     }
 }
+
 export default AuthReducer
