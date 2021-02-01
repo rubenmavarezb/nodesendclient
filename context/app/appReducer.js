@@ -39,6 +39,11 @@ const AppReducer = (state, action) => {
                 original_name: action.payload.original_name,
                 loading: null
             }
+        case CREATE_FILE_SUCCESS:
+            return {
+                ...state,
+                url: action.payload
+            }
         default:
             return state
     }

@@ -6,7 +6,7 @@ const Dropzone = () => {
 
     const appContext = useContext(AppContext);
 
-    const { loading, showAlert, uploadFile } = appContext;
+    const { loading, showAlert, uploadFile, createLink } = appContext;
 
     const onDropRejected = () => {
         showAlert("Can't upload the file, limit is 1MB. Create an account to upload bigger files")
@@ -27,10 +27,6 @@ const Dropzone = () => {
         </li>
     ))
 
-    const createLink = () => {
-        console.log('Creting link..')
-    }
-
 
     return ( 
         <div className="md:flex-1 mb-3 mx-2 mt-16 lg:mt-0 flex flex-col items-center justify-center border-dashed border-gray-400 border-2 bg-gray-100">
@@ -45,7 +41,7 @@ const Dropzone = () => {
                         <button
                             type='button'
                             className='bg-blue-700 w-full py-3 rounded-lg text-white my-10 hover:bg-blue-800'
-                            onClick={createLink}
+                            onClick={() => createLink()}
                         >Create link</button>
                     )}
 

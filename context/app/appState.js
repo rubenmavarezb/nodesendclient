@@ -19,7 +19,11 @@ const AppContextProvider = ({children}) => {
         file_msg: null,
         name: '',
         original_name: '',
-        loading: null
+        loading: null,
+        download: 1,
+        password: '',
+        author: null,
+        url: ''
     }
 
     const [state, dispatch] = useReducer(AppReducer, initialState)
@@ -56,6 +60,26 @@ const AppContextProvider = ({children}) => {
         }
     }
 
+    const createLink = async () => {
+        const data = {
+            name: state.name,
+            original_name: state.original_name,
+            download: state.download,
+            password: state.password,
+            author: state.author
+        }
+
+        try {
+            const result = await Axios.post('/api/links', data)
+            dispatch({
+                type:CREATE_FILE_SUCCESS,
+                payload: result.data.msg
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <AppContext.Provider
             value={{
@@ -63,8 +87,13 @@ const AppContextProvider = ({children}) => {
                 name: state.name,
                 original_name: state.original_name,
                 loading: state.loading,
+                download: state.download,
+                password: state.password,
+                author: state.author,
+                url: state.url,
                 showAlert,
-                uploadFile
+                uploadFile,
+                createLink
             }}
         >
             {children}
