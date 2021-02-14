@@ -79,10 +79,12 @@ const AuthContextProvider = ({children}) => {
 
         try {
             const response = await Axios.get('/api/auth');
-            dispatch({
-                type: USER_AUTHENTICATED,
-                payload: response.data.user
-            })
+            if(response.data.user) {
+                dispatch({
+                    type: USER_AUTHENTICATED,
+                    payload: response.data.user
+                })
+            }
         } catch (error) {
             dispatch({
                 type: ERROR_LOGIN,

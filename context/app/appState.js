@@ -10,7 +10,8 @@ import {
     CLEAR_ALERTS, 
     SHOW_ALERTS,
     CREATE_FILE_SUCCESS,
-    CREATE_FILE_ERROR } from '../../types';
+    CREATE_FILE_ERROR,
+    CLEAR_STATE } from '../../types';
 
 
 const AppContextProvider = ({children}) => {
@@ -80,6 +81,12 @@ const AppContextProvider = ({children}) => {
         }
     }
 
+    const clearState = () => {
+        dispatch({
+            type: CLEAR_STATE
+        })
+    }
+
     return (
         <AppContext.Provider
             value={{
@@ -93,7 +100,8 @@ const AppContextProvider = ({children}) => {
                 url: state.url,
                 showAlert,
                 uploadFile,
-                createLink
+                createLink,
+                clearState
             }}
         >
             {children}

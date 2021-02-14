@@ -36,7 +36,8 @@ const AuthReducer = (state, action) => {
         case USER_AUTHENTICATED:
             return {
                 ...state,
-                user: action.payload
+                user: action.payload,
+                authenticated: true
             }
         case LOG_OUT:
             localStorage.removeItem('reactnodesendtoken') 

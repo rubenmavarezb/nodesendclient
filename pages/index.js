@@ -15,6 +15,7 @@ const Index = () => {
   const { file_msg, url } = appContext;
 
   useEffect(() => {
+    const token = localStorage.getItem('reactnodesendtoken')
     userAuthenticated();
   }, [])
 

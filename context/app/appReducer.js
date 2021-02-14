@@ -5,7 +5,8 @@ import {
     CLEAR_ALERTS, 
     SHOW_ALERTS,
     CREATE_FILE_SUCCESS,
-    CREATE_FILE_ERROR } from '../../types';
+    CREATE_FILE_ERROR,
+    CLEAR_STATE } from '../../types';
 
 
 // const initialState = {
@@ -43,6 +44,18 @@ const AppReducer = (state, action) => {
             return {
                 ...state,
                 url: action.payload
+            }
+        case CLEAR_STATE: 
+            return {
+                ...state,
+                file_msg: null,
+                name: '',
+                original_name: '',
+                loading: null,
+                download: 1,
+                password: '',
+                author: null,
+                url: ''
             }
         default:
             return state
