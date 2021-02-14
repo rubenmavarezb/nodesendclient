@@ -12,8 +12,6 @@ const Dropzone = () => {
     const authContext = useContext(AuthContext);
     const { user, authenticated } = authContext;
 
-    console.log(authenticated)
-
     const onDropRejected = () => {
         showAlert("Can't upload the file, limit is 1MB. Create an account to upload bigger files")
     }

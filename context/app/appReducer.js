@@ -6,7 +6,9 @@ import {
     SHOW_ALERTS,
     CREATE_FILE_SUCCESS,
     CREATE_FILE_ERROR,
-    CLEAR_STATE } from '../../types';
+    CLEAR_STATE,
+    ADD_PASSWORD,
+    ADD_DOWNLOADS } from '../../types';
 
 
 // const initialState = {
@@ -56,6 +58,16 @@ const AppReducer = (state, action) => {
                 password: '',
                 author: null,
                 url: ''
+            }
+        case ADD_PASSWORD:
+            return {
+                ...state,
+                password: action.payload
+            }
+        case ADD_DOWNLOADS:
+            return {
+                ...state,
+                download: action.payload
             }
         default:
             return state

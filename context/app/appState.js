@@ -11,7 +11,9 @@ import {
     SHOW_ALERTS,
     CREATE_FILE_SUCCESS,
     CREATE_FILE_ERROR,
-    CLEAR_STATE } from '../../types';
+    CLEAR_STATE,
+    ADD_PASSWORD,
+    ADD_DOWNLOADS } from '../../types';
 
 
 const AppContextProvider = ({children}) => {
@@ -65,7 +67,7 @@ const AppContextProvider = ({children}) => {
         const data = {
             name: state.name,
             original_name: state.original_name,
-            download: state.download,
+            downloads: state.download,
             password: state.password,
             author: state.author
         }
@@ -87,6 +89,20 @@ const AppContextProvider = ({children}) => {
         })
     }
 
+    const addPassword = password => {
+        dispatch({
+            type: ADD_PASSWORD,
+            payload: password
+        })
+    }
+
+    const addDownloads = downloads => {
+        dispatch({
+            type:ADD_DOWNLOADS,
+            payload: downloads
+        })
+    }
+
     return (
         <AppContext.Provider
             value={{
@@ -101,7 +117,9 @@ const AppContextProvider = ({children}) => {
                 showAlert,
                 uploadFile,
                 createLink,
-                clearState
+                clearState,
+                addPassword,
+                addDownloads
             }}
         >
             {children}
