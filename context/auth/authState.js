@@ -57,6 +57,7 @@ const AuthContextProvider = ({children}) => {
 
         try {
             const response = await Axios.post('/api/auth', data);
+            console.log(response)
             dispatch({
                 type: SUCCESSFUL_LOGIN,
                 payload:response.data.token
